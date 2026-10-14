@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="plugin.fuse.page_title">FUSE - Silo</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/img/site.webmanifest">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/i18n.js"></script>
+    <style>
+        .page-wrap {
+            display: flex;
+            justify-content: center;
+            padding: 24px 32px;
+            min-height: 100vh;
+        }
+        .page-inner {
+            width: 100%;
+            max-width: 800px;
+        }
+        .panel {
+            max-width: 100%;
+        }
+        /* Подсказка под заголовком панели: без отступа она липнет к
+           подписи первого поля. */
+        .panel h2 + .hint {
+            margin-bottom: 16px;
+        }
+        .path-value {
+            display: block;
+            background: var(--silo-bg-raised);
+            border: 1px solid var(--silo-border);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--silo-amber);
+            user-select: all;
+            word-break: break-all;
+        }
+        /* Строка флажка: подпись справа от контрола. Размер самого
+           контрола задает общий стиль, трогать его ширину нельзя. */
+        .check-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            color: var(--silo-text-muted);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        @media (max-width: 767px) {
+            .page-wrap {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+    <div class="page-inner">
+        <header class="topbar">
+            <h1 id="page-title" data-i18n="plugin.fuse.title">FUSE</h1>
+            <a href="/" class="btn btn-secondary btn-sm" data-i18n="plugin.fuse.back">Back</a>
+        </header>
+
+        <section id="view">
+            <div class="panel" id="unsupported-panel" style="display: none;">
+                <h2 data-i18n="plugin.fuse.unsupported_title">Not supported</h2>
+                <p class="hint" data-i18n="plugin.fuse.unsupported_hint">
+                    FUSE mounting is not available on this system.
+                </p>
+            </div>
+
+            <div class="panel" id="mount-panel">
+                <h2 data-i18n="plugin.fuse.mount_title">Mount</h2>
+                <p class="hint" data-i18n="plugin.fuse.mount_hint">
+                    Choose an empty directory on the server. The library will appear there read-only.
+                </p>
+
+                <label class="field">
+                    <span data-i18n="plugin.fuse.path">Mount point</span>
+                    <input class="input" type="text" id="path-input" placeholder="/mnt/silo" autocomplete="off">
+                </label>
+
+                <label class="check-row">
+                    <input type="checkbox" id="allow-other-input">
+                    <span data-i18n="plugin.fuse.allow_other">Allow other users of this machine to read the mount</span>
+                </label>
+
+                <label class="check-row">
+                    <input type="checkbox" id="autostart-input">
+                    <span data-i18n="plugin.fuse.autostart">Mount on server start</span>
+                </label>
+
+                <div class="row" style="justify-content: flex-end; margin-top: 8px;">
+                    <button class="btn btn-secondary" id="btn-save" type="button" data-i18n="plugin.fuse.save">Save</button>
+                    <button class="btn" id="btn-mount" type="button" data-i18n="plugin.fuse.mount">Mount</button>
+                </div>
+            </div>
+
+            <div class="panel" id="mounted-panel" style="display: none;">
+                <h2 data-i18n="plugin.fuse.mounted_title">Mounted</h2>
+                <p class="hint" data-i18n="plugin.fuse.mounted_hint">The library is available at:</p>
+                <code class="path-value" id="mounted-path">...</code>
+
+                <div class="row" style="justify-content: flex-end; margin-top: 16px;">
+                    <button class="btn btn-danger" id="btn-unmount" type="button" data-i18n="plugin.fuse.unmount">Unmount</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div id="toast-root" class="toast-root"></div>
+
+<script src="/plugins/fuse/js/app.js"></script>
+</body>
+</html>

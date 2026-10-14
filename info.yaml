@@ -1,0 +1,24 @@
+id: "fuse"
+name: "FUSE"
+version: "1.0.0"
+author: "YouROK"
+description: "Mount the torrent library as a local read-only filesystem"
+entry: "service.js"
+icon: "/img/ico-fuse.svg"
+
+routes:
+  - "/"
+  - "/index.html"
+  - "/js/*"
+  - "/img/*"
+  - "/api/status"
+  - "/api/mount"
+  - "/api/unmount"
+  - "/api/config"
+
+menu:
+  - title: "FUSE"
+    title_key: "plugin.fuse.title"
+    route: "/"
+    rank: 100
+    icon: "/img/ico-fuse.svg"
