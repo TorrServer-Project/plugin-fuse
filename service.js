@@ -83,7 +83,7 @@ ts.web.post('/api/mount', function(req, res) {
         return res.status(400).json(result);
     }
 
-    saveConfig({ autostart: currentConfig.autostart, path: path, allow_other: allowOther });
+    saveConfig({ autostart: body.autostart === true, path: path, allow_other: allowOther });
     res.json(statusPayload());
 });
 

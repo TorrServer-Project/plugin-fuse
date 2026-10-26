@@ -123,7 +123,7 @@ document.getElementById('btn-mount').addEventListener('click', function() {
         showToast(t('plugin.fuse.error_empty_path'), 'error');
         return;
     }
-    post('api/mount', { path: body.path, allow_other: body.allow_other }, t('plugin.fuse.mounted'));
+    post('api/mount', { autostart: body.autostart, path: body.path, allow_other: body.allow_other }, t('plugin.fuse.mounted'));
 });
 
 document.getElementById('btn-unmount').addEventListener('click', function() {
