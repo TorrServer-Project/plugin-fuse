@@ -54,9 +54,25 @@
             font-weight: 500;
             cursor: pointer;
         }
+        /* Кнопки панели прижаты вправо */
+        .actions-row {
+            justify-content: flex-end;
+            margin-top: 8px;
+        }
+        /* Под адресом монтирования кнопке нужен больший отступ */
+        #mounted-panel .actions-row {
+            margin-top: 16px;
+        }
         @media (max-width: 767px) {
             .page-wrap {
-                padding: 16px;
+                padding: 12px;
+            }
+            /* Подпись может занять две строки: флажок остается у первой */
+            .check-row {
+                align-items: flex-start;
+            }
+            .check-row span {
+                line-height: 1.4;
             }
         }
     </style>
@@ -85,7 +101,7 @@
 
                 <label class="field">
                     <span data-i18n="plugin.fuse.path">Mount point</span>
-                    <input class="input" type="text" id="path-input" placeholder="/mnt/silo" autocomplete="off">
+                    <input class="input" type="text" id="path-input" placeholder="/mnt/silo" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
                 </label>
 
                 <label class="check-row">
@@ -98,7 +114,7 @@
                     <span data-i18n="plugin.fuse.autostart">Mount on server start</span>
                 </label>
 
-                <div class="row" style="justify-content: flex-end; margin-top: 8px;">
+                <div class="row actions-row">
                     <button class="btn btn-secondary" id="btn-save" type="button" data-i18n="plugin.fuse.save">Save</button>
                     <button class="btn" id="btn-mount" type="button" data-i18n="plugin.fuse.mount">Mount</button>
                 </div>
@@ -109,7 +125,7 @@
                 <p class="hint" data-i18n="plugin.fuse.mounted_hint">The library is available at:</p>
                 <code class="path-value" id="mounted-path">...</code>
 
-                <div class="row" style="justify-content: flex-end; margin-top: 16px;">
+                <div class="row actions-row">
                     <button class="btn btn-danger" id="btn-unmount" type="button" data-i18n="plugin.fuse.unmount">Unmount</button>
                 </div>
             </div>
